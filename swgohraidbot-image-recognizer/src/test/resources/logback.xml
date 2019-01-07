@@ -1,0 +1,27 @@
+<!-- added this configuration for liquibase to reduce amount of logs -->
+<!-- tried to add slf4j with log4j excluding logback to keep it log4j but liquibase still uses logback instead -->
+<configuration debug="true" scan="true"
+               scanPeriod="10 seconds">
+
+    <appender name="consoleAppender"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.markjay.services.raidinfoextractor.DamageFromTextExtractor" level="off" additivity="false">
+        <appender-ref ref="consoleAppender" />
+    </logger>
+
+    <logger name="org.markjay.services.raidinfoextractor.RaidInfoExtractorGenSearchTest" level="info" additivity="false">
+        <appender-ref ref="consoleAppender" />
+    </logger>
+
+
+    <root level="error">
+        <appender-ref ref="consoleAppender" />
+    </root>
+</configuration>
